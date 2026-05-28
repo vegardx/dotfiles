@@ -1,7 +1,6 @@
 [core]
 	pager = less
 	editor = nano
-	excludefile = ~/.gitignore
 
 [user]
 	email = vegard@netwerk.io

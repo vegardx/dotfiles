@@ -46,7 +46,6 @@
     - { src: zshenv, dest: .zshenv }
     - { src: zprofile, dest: .zprofile }
     - { src: gitconfig, dest: .gitconfig }
-    - { src: gitignore, dest: .gitignore }
 
 - name: Symlink zsh modules
   ansible.builtin.file:
