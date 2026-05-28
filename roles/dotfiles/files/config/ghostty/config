@@ -5,7 +5,7 @@ window-padding-x = 10
 window-padding-y = 10
 shell-integration-features = no-title
 maximize = true
-theme = catppuccin-macchiato
+theme = Catppuccin Macchiato
 font-family = "Menlo"
 font-size = 16
 keybind = shift+enter=text:\x1b\r
