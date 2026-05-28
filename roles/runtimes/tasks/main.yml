@@ -1,2 +1,84 @@
 ---
-# Runtimes and tools
+# ── Directory structure ───────────────────────────────────────────────
+- name: Create directory structure
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - src/github.com/vegardx
+    - tmp
+
+# ── mise global tools ─────────────────────────────────────────────────
+- name: Install mise global tools
+  ansible.builtin.shell: |
+    eval "$(/opt/homebrew/bin/mise activate bash)"
+    mise use --global node@22 go@1.26 terraform@1.9 uv@latest
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/share/mise/installs/node"
+
+# ── Docker CLI plugins ────────────────────────────────────────────────
+- name: Ensure ~/.docker/cli-plugins directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.docker/cli-plugins"
+    state: directory
+    mode: "0755"
+
+- name: Symlink docker-compose plugin
+  ansible.builtin.file:
+    src: "/opt/homebrew/opt/docker-compose/bin/docker-compose"
+    dest: "{{ ansible_env.HOME }}/.docker/cli-plugins/docker-compose"
+    state: link
+    force: true
+
+- name: Symlink docker-buildx plugin
+  ansible.builtin.file:
+    src: "/opt/homebrew/opt/docker-buildx/bin/docker-buildx"
+    dest: "{{ ansible_env.HOME }}/.docker/cli-plugins/docker-buildx"
+    state: link
+    force: true
+
+# ── Global npm packages ───────────────────────────────────────────────
+- name: Install global npm packages
+  ansible.builtin.shell: |
+    eval "$(/opt/homebrew/bin/mise activate bash)"
+    npm install -g {{ item }}
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/share/mise/installs/node/22/lib/node_modules/{{ item.split('/')[-1] }}"
+  loop:
+    - "@earendil-works/pi-coding-agent"
+    - codeburn
+
+# ── gh extensions ─────────────────────────────────────────────────────
+- name: Install gh extensions
+  ansible.builtin.shell: gh extension install {{ item }}
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/share/gh/extensions/{{ item.split('/')[-1] }}"
+  loop:
+    - agbiotech/gh-sub-issue
+
+# ── Post-setup message ────────────────────────────────────────────────
+- name: Display post-setup reminders
+  ansible.builtin.debug:
+    msg: |
+      ┌──────────────────────────────────────────────────────────┐
+      │ Manual steps remaining:                                  │
+      │                                                          │
+      │ 1. Add secrets to macOS Keychain:                        │
+      │    security add-generic-password -a $LOGNAME \           │
+      │      -s exa-api-key -w "<value>"                         │
+      │                                                          │
+      │ 2. Import GPG private key:                               │
+      │    gpg --import /path/to/private-key.asc                 │
+      │                                                          │
+      │ 3. Authenticate gh:                                      │
+      │    gh auth login                                         │
+      │                                                          │
+      │ 4. Start colima:                                         │
+      │    colima start                                          │
+      │                                                          │
+      │ 5. Set up atuin sync (if desired):                       │
+      │    atuin login                                           │
+      │                                                          │
+      │ 6. Log out and back in for login items to take effect    │
+      └──────────────────────────────────────────────────────────┘
