@@ -13,7 +13,7 @@
 - name: Install mise global tools
   ansible.builtin.shell: |
     eval "$(/opt/homebrew/bin/mise activate bash)"
-    mise use --global node@22 go@1.26 terraform@1.9 uv@latest
+    mise use --global node@22 go@1.26 terraform@1.9 uv@latest tflint@latest
   args:
     creates: "{{ ansible_env.HOME }}/.local/share/mise/installs/node"
 
