@@ -83,11 +83,16 @@ function fork() {
   # Fork on GitHub (idempotent — no-op if already forked)
   gh repo fork "${host}/${path}" --clone=false
 
-  # Get the fork's SSH URL
+  # Resolve URLs via gh (handles GHE SSH usernames correctly)
   local gh_user
-  gh_user=$(gh api user --jq .login)
-  local fork_url="git@${host}:${gh_user}/${path##*/}.git"
-  local upstream_url="git@${host}:${path}.git"
+  gh_user=$(gh api user --hostname "$host" --jq .login 2>/dev/null) || \
+    gh_user=$(gh api user --jq .login)
+  local fork_repo="${gh_user}/${path##*/}"
+  local fork_url upstream_url
+  fork_url=$(gh repo view "${fork_repo}" --hostname "$host" --json sshUrl --jq .sshUrl 2>/dev/null) || \
+    fork_url="https://${host}/${fork_repo}.git"
+  upstream_url=$(gh repo view "${host}/${path}" --json sshUrl --jq .sshUrl 2>/dev/null) || \
+    upstream_url="https://${host}/${path}.git"
 
   mkdir -p "$(dirname "$target")"
   git clone "$fork_url" "$target" && cd "$target"
