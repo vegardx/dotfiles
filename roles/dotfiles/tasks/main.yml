@@ -49,6 +49,12 @@
     state: directory
     mode: "0700"
 
+- name: Ensure ~/.docker directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_facts.env.HOME }}/.docker"
+    state: directory
+    mode: "0755"
+
 - name: Ensure ~/.config/pi/agent directory exists
   ansible.builtin.file:
     path: "{{ ansible_facts.env.HOME }}/.config/pi/agent"
@@ -132,6 +138,13 @@
   ansible.builtin.file:
     src: "{{ role_path }}/files/ssh/config"
     dest: "{{ ansible_facts.env.HOME }}/.ssh/config"
+    state: link
+    force: true
+
+- name: Symlink Docker config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/docker/config.json"
+    dest: "{{ ansible_facts.env.HOME }}/.docker/config.json"
     state: link
     force: true
 
