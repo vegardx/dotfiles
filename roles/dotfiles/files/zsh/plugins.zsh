@@ -11,9 +11,6 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # mise — polyglot version manager (node, go, terraform, uv)
 eval "$(mise activate zsh)"
 
-# atuin — SQLite-backed shell history; rebinds Ctrl-R (runs after fzf)
-eval "$(atuin init zsh)"
-
 # gpg-agent TTY + SSH-agent integration
 export GPG_TTY=$TTY
 autoload -U add-zsh-hook

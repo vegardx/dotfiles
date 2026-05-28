@@ -14,7 +14,6 @@
     - .config/git
     - .config/ghostty/themes
     - .config/mise
-    - .config/atuin
     - .config/gh
 
 - name: Ensure ~/.gnupg directory exists
@@ -69,7 +68,6 @@
     - ghostty/config
     - ghostty/themes/catppuccin-macchiato.conf
     - mise/config.toml
-    - atuin/config.toml
     - gh/config.yml
 
 - name: Symlink gnupg configs

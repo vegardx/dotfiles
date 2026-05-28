@@ -79,8 +79,5 @@
       │ 4. Start colima:                                         │
       │    colima start                                          │
       │                                                          │
-      │ 5. Set up atuin sync (if desired):                       │
-      │    atuin login                                           │
-      │                                                          │
-      │ 6. Log out and back in for login items to take effect    │
+      │ 5. Log out and back in for login items to take effect    │
       └──────────────────────────────────────────────────────────┘
