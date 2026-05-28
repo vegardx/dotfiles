@@ -9,6 +9,8 @@ Applies to every repo regardless of host or org.
 - Rebase or merge the default branch into a feature branch to resolve
   conflicts; don't force-push shared branches.
 - Discover the default branch with `gh repo view --json defaultBranchRef -q .defaultBranchRef.name`.
+- Check branch protection rules with `gh api repos/{owner}/{repo}/rules/branches/{branch}`.
+  Never push directly to protected branches — always open a PR.
 
 ## Commit conventions
 - Conventional commits: `type(scope): subject` — subject ≤ 72 chars.
