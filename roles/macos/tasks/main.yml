@@ -160,3 +160,8 @@
   register: login_item_result
   changed_when: login_item_result.rc == 0
   failed_when: false
+
+# ── App preferences ───────────────────────────────────────────────────
+- name: Import Stats preferences
+  ansible.builtin.command: defaults import eu.exelban.Stats {{ role_path }}/../dotfiles/files/config/stats/eu.exelban.Stats.plist
+  changed_when: true
