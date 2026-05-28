@@ -40,6 +40,12 @@
     state: link
     force: true
 
+
+- name: Start colima on login
+  ansible.builtin.command: brew services start colima
+  args:
+    creates: "{{ ansible_facts.env.HOME }}/Library/LaunchAgents/homebrew.mxcl.colima.plist"
+
 # ── Global npm packages ───────────────────────────────────────────────
 - name: Install global npm packages
   ansible.builtin.shell: |
@@ -78,8 +84,5 @@
       │ 3. Authenticate gh:                                      │
       │    gh auth login                                         │
       │                                                          │
-      │ 4. Start colima:                                         │
-      │    colima start                                          │
-      │                                                          │
-      │ 5. Log out and back in for login items to take effect    │
+      │ 4. Log out and back in for login items to take effect    │
       └──────────────────────────────────────────────────────────┘
