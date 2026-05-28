@@ -1,8 +1,6 @@
-# github.com — public open source
+# ~/src/github.com — public open source
 
-## Context
-All repos under github.com are public unless explicitly marked private.
-GitHub Actions for CI/CD.
+Applies to all repos hosted on github.com.
 
 ## Public repo hygiene
 - Never commit secrets, tokens, or credentials.
@@ -11,4 +9,5 @@ GitHub Actions for CI/CD.
 
 ## Defaults
 - MIT licence unless there is a specific reason to choose otherwise.
+- GitHub Actions for CI.
 - Dependabot for dependency updates (npm, pip, github-actions as applicable).

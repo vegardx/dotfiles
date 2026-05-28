@@ -1,9 +1,7 @@
-# netwerk-io — personal org
+# ~/src/github.com/netwerk-io — personal org
 
-## Context
-Personal GitHub org owned by Vegard Hansen (vegard@netwerk.io).
-Used for projects that may have collaborators or a broader audience
-but are still personal/side-project in nature.
+GitHub org owned by Vegard Hansen (vegard@netwerk.io). Projects that may have
+collaborators or a broader audience but are still personal in nature.
 
 ## Conventions
 - Same standards as vegardx/ personal repos.

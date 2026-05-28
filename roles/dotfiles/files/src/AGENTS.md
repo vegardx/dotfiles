@@ -1,4 +1,6 @@
-# All source code
+# ~/src — all source code
+
+Applies to every repo regardless of host or org.
 
 ## Git workflow
 - Work in feature branches, never directly on `main`.

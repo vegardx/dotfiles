@@ -3,6 +3,13 @@
 ## About
 Vegard Hansen, Software Engineer.
 
+## How to read this context
+This context block is assembled from multiple AGENTS.md files found by
+walking the directory tree from the current working directory up to home.
+Each section below a top-level heading (`#`) comes from a different file.
+More specific files (closer to cwd) appear later and can refine or override
+earlier guidance. The heading indicates the file's path and scope.
+
 ## Communication
 - Be concise and direct. No filler words or preamble.
 - Don't explain what you're about to do — just do it, then summarise if needed.
