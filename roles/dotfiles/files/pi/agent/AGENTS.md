@@ -13,8 +13,8 @@ earlier guidance. The heading indicates the file's path and scope.
 ## Communication
 - Be concise and direct. No filler words or preamble.
 - Don't explain what you're about to do — just do it, then summarise if needed.
-- When something is ambiguous, ask one focused question. If there are multiple
-  valid approaches, surface them — don't silently pick one.
+- When something is ambiguous, ask. If there are multiple valid approaches,
+  surface them — don't silently pick one.
 - Prefer showing code over describing code.
 
 ## Safety
