@@ -37,7 +37,11 @@ macos_dock_apps:
   - /Applications/Zed.app
   - /Applications/Visual Studio Code - Insiders.app
   - /Applications/Slack.app
+  - /Applications/Microsoft Teams.app
+  - /Applications/Discord.app
   - /System/Applications/Messages.app
+  - /System/Applications/System Settings.app
+  - /System/Applications/Utilities/Activity Monitor.app
 
 # Login items
 macos_login_items:
