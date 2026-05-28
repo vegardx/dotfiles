@@ -29,11 +29,3 @@ Always ask, regardless of mode:
   secrets — never read, edit, or commit them.
 - A task that would touch more than ~3 unrelated areas — check the
   scope first.
-
-## Available skills
-- **exa-search** — semantic web search. Use when you need current information,
-  prior art, library comparisons, or documentation that may be stale in your
-  training data. Invoke with `/skill:exa-search`.
-- **context7** — version-accurate library documentation. Use when the task
-  involves a specific library and you need current API references, method
-  signatures, or usage examples. Invoke with `/skill:context7`.

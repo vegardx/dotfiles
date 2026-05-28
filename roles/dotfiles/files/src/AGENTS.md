@@ -20,6 +20,12 @@
 - Tabs, double quotes, 80-col line length (Biome defaults).
 - No comments that restate what the code does — comment *why*, not *what*.
 
+## Go
+- Follow standard Go project layout.
+- `golangci-lint` for linting.
+- Table-driven tests.
+- No comments that restate what the code does — comment *why*, not *what*.
+
 ## Python
 - Type hints on all function signatures.
 - `ruff` for linting and formatting.
@@ -34,7 +40,7 @@
 - A task isn't done until the relevant tests pass and the linter is clean.
 - Don't delete or skip tests to make the suite green.
 
-# Documentation
-- Keep README.md short and consice, avoid fluff and filler words. 
+## Documentation
+- Keep README.md short and concise, avoid fluff and filler words.
 - For more structured documentation use `docs/`.
-- Use mermaid when creating visualization like flow diagrams and similar.
+- Use mermaid when creating visualizations like flow diagrams and similar.

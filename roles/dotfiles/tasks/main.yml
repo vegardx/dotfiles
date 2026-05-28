@@ -145,4 +145,6 @@
   loop:
     - AGENTS.md
     - github.com/AGENTS.md
+    - github.com/vegardx/AGENTS.md
+    - github.com/netwerk-io/AGENTS.md
     - dnb.ghe.com/AGENTS.md
