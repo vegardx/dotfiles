@@ -1,24 +1,29 @@
 ---
-- name: Ensure ~/.zsh directory exists
-  ansible.builtin.file:
-    path: "{{ ansible_facts.env.HOME }}/.zsh"
-    state: directory
-    mode: "0755"
-
-- name: Ensure ~/.config subdirectories exist
+# ── XDG directories ──────────────────────────────────────────────────
+- name: Ensure XDG config subdirectories exist
   ansible.builtin.file:
     path: "{{ ansible_facts.env.HOME }}/{{ item }}"
     state: directory
     mode: "0755"
   loop:
     - .config/git
+    - .config/gnupg
+    - .config/zsh
     - .config/ghostty/themes
     - .config/mise
     - .config/gh
 
-- name: Ensure ~/.gnupg directory exists
+- name: Ensure XDG data directories exist
   ansible.builtin.file:
-    path: "{{ ansible_facts.env.HOME }}/.gnupg"
+    path: "{{ ansible_facts.env.HOME }}/{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - .local/share/zsh
+
+- name: Ensure ~/.config/gnupg has restricted permissions
+  ansible.builtin.file:
+    path: "{{ ansible_facts.env.HOME }}/.config/gnupg"
     state: directory
     mode: "0700"
 
@@ -34,29 +39,54 @@
     state: directory
     mode: "0755"
 
-- name: Symlink home directory dotfiles
+# ── Bootstrap zshenv (only file that stays in ~) ─────────────────────
+- name: Symlink bootstrap ~/.zshenv
   ansible.builtin.file:
-    src: "{{ role_path }}/files/{{ item.src }}"
-    dest: "{{ ansible_facts.env.HOME }}/{{ item.dest }}"
+    src: "{{ role_path }}/files/zshenv-bootstrap"
+    dest: "{{ ansible_facts.env.HOME }}/.zshenv"
     state: link
     force: true
-  loop:
-    - { src: zshrc, dest: .zshrc }
-    - { src: zshenv, dest: .zshenv }
-    - { src: zprofile, dest: .zprofile }
-    - { src: gitconfig, dest: .gitconfig }
 
-- name: Symlink zsh modules
+# ── Zsh config (ZDOTDIR = ~/.config/zsh) ─────────────────────────────
+- name: Symlink zsh dotfiles
   ansible.builtin.file:
-    src: "{{ role_path }}/files/zsh/{{ item }}"
-    dest: "{{ ansible_facts.env.HOME }}/.zsh/{{ item }}"
+    src: "{{ role_path }}/files/config/zsh/{{ item }}"
+    dest: "{{ ansible_facts.env.HOME }}/.config/zsh/{{ item }}"
     state: link
     force: true
   loop:
+    - .zshenv
+    - .zshrc
+    - .zprofile
     - shell.zsh
     - prompt.zsh
     - plugins.zsh
 
+# ── Git config (native XDG path) ─────────────────────────────────────
+- name: Symlink git config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/config/git/{{ item }}"
+    dest: "{{ ansible_facts.env.HOME }}/.config/git/{{ item }}"
+    state: link
+    force: true
+  loop:
+    - config
+    - config-github
+    - config-dnb
+    - ignore
+
+# ── GnuPG (GNUPGHOME = ~/.config/gnupg) ──────────────────────────────
+- name: Symlink gnupg configs
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/config/gnupg/{{ item }}"
+    dest: "{{ ansible_facts.env.HOME }}/.config/gnupg/{{ item }}"
+    state: link
+    force: true
+  loop:
+    - gpg.conf
+    - gpg-agent.conf
+
+# ── Other ~/.config apps ─────────────────────────────────────────────
 - name: Symlink config files
   ansible.builtin.file:
     src: "{{ role_path }}/files/config/{{ item }}"
@@ -64,22 +94,12 @@
     state: link
     force: true
   loop:
-    - git/ignore
     - ghostty/config
     - ghostty/themes/catppuccin-macchiato.conf
     - mise/config.toml
     - gh/config.yml
 
-- name: Symlink gnupg configs
-  ansible.builtin.file:
-    src: "{{ role_path }}/files/gnupg/{{ item }}"
-    dest: "{{ ansible_facts.env.HOME }}/.gnupg/{{ item }}"
-    state: link
-    force: true
-  loop:
-    - gpg.conf
-    - gpg-agent.conf
-
+# ── Pi agent ─────────────────────────────────────────────────────────
 - name: Symlink pi agent configs
   ansible.builtin.file:
     src: "{{ role_path }}/files/pi/agent/{{ item }}"
@@ -91,9 +111,22 @@
     - AGENTS.md
     - keybindings.json
 
+# ── SSH ──────────────────────────────────────────────────────────────
 - name: Symlink SSH config
   ansible.builtin.file:
     src: "{{ role_path }}/files/ssh/config"
     dest: "{{ ansible_facts.env.HOME }}/.ssh/config"
     state: link
     force: true
+
+# ── AGENTS.md (pi context hierarchy) ─────────────────────────────────
+- name: Symlink AGENTS.md files
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/src/{{ item }}"
+    dest: "{{ ansible_facts.env.HOME }}/src/{{ item }}"
+    state: link
+    force: true
+  loop:
+    - AGENTS.md
+    - github.com/AGENTS.md
+    - dnb.ghe.com/AGENTS.md

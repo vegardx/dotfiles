@@ -5,7 +5,7 @@ function _zwarn { print -P "%F{196}WARNING%F{208} ~>%f $1" }
 
 # Modules (order matters: shell → prompt → plugins)
 for _mod in shell prompt plugins; do
-  source "${HOME}/.zsh/${_mod}.zsh" || _zwarn "Could not source ~/.zsh/${_mod}.zsh"
+  source "${ZDOTDIR}/${_mod}.zsh" || _zwarn "Could not source ${ZDOTDIR}/${_mod}.zsh"
 done
 unset _mod
 

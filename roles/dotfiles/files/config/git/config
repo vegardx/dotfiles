@@ -2,10 +2,6 @@
 	pager = less
 	editor = nano
 
-[user]
-	email = vegard@netwerk.io
-	name = Vegard Hansen
-
 [pull]
 	rebase = true
 
@@ -15,3 +11,12 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://dnb.ghe.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+
+[includeIf "gitdir:~/src/github.com/"]
+	path = ~/.config/git/config-github
+
+[includeIf "gitdir:~/src/dnb.ghe.com/"]
+	path = ~/.config/git/config-dnb

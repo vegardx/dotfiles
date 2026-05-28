@@ -1,4 +1,4 @@
-# ~/.zshenv — sourced by EVERY zsh invocation (interactive, non-interactive, script, ssh).
+# $ZDOTDIR/.zshenv — sourced by EVERY zsh invocation (interactive, non-interactive, script, ssh).
 # Keep this file env-only: no aliases, no prompt, no ZLE config, no compinit.
 # vim: ft=zsh
 
@@ -27,8 +27,8 @@ export PATH
   MANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman:$MANPATH"
 export MANPATH
 
-# History
-export HISTFILE="$HOME/.history"
+# History (XDG-compliant)
+export HISTFILE="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/history"
 export HISTSIZE=150000
 export SAVEHIST=150000
 

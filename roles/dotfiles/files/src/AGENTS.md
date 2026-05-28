@@ -1,0 +1,40 @@
+# All source code
+
+## Git workflow
+- Work in feature branches, never directly on `main`.
+- Keep commits small and focused — one logical change per commit.
+- Keep PRs focused on a single concern. Split unrelated changes.
+- Rebase or merge main into a branch to resolve conflicts; don't force-push
+  shared branches.
+
+## Commit conventions
+- Conventional commits: `type(scope): subject` — subject ≤ 72 chars.
+- Valid types: `feat`, `fix`, `refactor`, `docs`, `chore`, `test`, `style`,
+  `perf`, `ci`, `build`.
+- Body only when the change needs explanation — not a description of what the
+  diff already shows.
+
+## TypeScript
+- Strict mode always on.
+- No `any` unless there is a concrete reason; prefer `unknown` for loose inputs.
+- Tabs, double quotes, 80-col line length (Biome defaults).
+- No comments that restate what the code does — comment *why*, not *what*.
+
+## Python
+- Type hints on all function signatures.
+- `ruff` for linting and formatting.
+- `pytest` for tests.
+- No `# type: ignore` without a comment explaining why.
+- No comments that restate what the code does — comment *why*, not *what*.
+
+## Testing
+- Source code in `src/`, tests in `tests/`.
+- Test behaviour, not implementation — don't assert on internal state that
+  could change without breaking the contract.
+- A task isn't done until the relevant tests pass and the linter is clean.
+- Don't delete or skip tests to make the suite green.
+
+# Documentation
+- Keep README.md short and consice, avoid fluff and filler words. 
+- For more structured documentation use `docs/`.
+- Use mermaid when creating visualization like flow diagrams and similar.
