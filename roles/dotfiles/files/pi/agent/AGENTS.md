@@ -28,6 +28,10 @@ Mode-aware. Pi has three modes: **plan** (read-only planning), **ask**
 - **Auto mode**: commit and push freely on feature branches. After each
   logical phase, push and open a PR — don't batch many phases into one
   unreviewed pile. Still ask before the things below.
+- **Hack mode**: full tool access, no plan structure. Just do the work
+  directly — commit and push to whatever branch is active (including main
+  for quick fixes). No need to create feature branches for small changes.
+  Still ask before the things below.
 
 Always ask, regardless of mode:
 - Force-pushing to `main` or any shared branch.
