@@ -8,3 +8,4 @@ collaborators or a broader audience but are still personal in nature.
 - Prefer small repos over monorepos.
 - README should explain what it does and how to use it, nothing more.
 - Branch protection on the default branch when collaborators are added.
+- May open issues, create PRs, and push without explicit approval.

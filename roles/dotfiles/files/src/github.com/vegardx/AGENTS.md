@@ -6,3 +6,4 @@ Vegard Hansen (vegard@netwerk.io). Solo maintainer.
 - No PR approval required, merge at will.
 - Prefer small repos over monorepos.
 - README should explain what it does and how to use it, nothing more.
+- May open issues, create PRs, and push without explicit approval.
