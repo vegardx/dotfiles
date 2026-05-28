@@ -37,6 +37,7 @@ homebrew_formulae:
   # Infra
   - awscli
   - azure-cli
+  - granted
   - terraform-docs
 
   # Security
