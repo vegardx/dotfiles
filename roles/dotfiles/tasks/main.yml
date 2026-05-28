@@ -136,6 +136,16 @@
     force: true
 
 # ── AGENTS.md (pi context hierarchy) ─────────────────────────────────
+- name: Ensure ~/src directories exist for AGENTS.md symlinks
+  ansible.builtin.file:
+    path: "{{ ansible_facts.env.HOME }}/src/{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - github.com/vegardx
+    - github.com/netwerk-io
+    - dnb.ghe.com
+
 - name: Symlink AGENTS.md files
   ansible.builtin.file:
     src: "{{ role_path }}/files/src/{{ item }}"
