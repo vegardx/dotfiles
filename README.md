@@ -61,7 +61,7 @@ security add-generic-password -a $LOGNAME -s context7-api-key -w "<value>"  # op
 Manual steps after the playbook completes:
 
 1. `gh auth login` — authenticate GitHub CLI
-2. `gpg --import /path/to/private-key.asc` — import GPG key
+2. `gpg --card-status` — set up GPG with YubiKey
 3. `colima start` — start Docker runtime
 4. `atuin login` — sync shell history (optional)
 5. Log out and back in for login items to take effect
