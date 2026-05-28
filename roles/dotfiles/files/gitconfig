@@ -1,0 +1,18 @@
+[core]
+	pager = less
+	editor = nano
+	excludefile = ~/.gitignore
+
+[user]
+	email = vegard@netwerk.io
+	name = Vegard Hansen
+
+[pull]
+	rebase = true
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

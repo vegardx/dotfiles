@@ -1,0 +1,5 @@
+[tools]
+node = "22"
+go = "1.26"
+terraform = "1.9"
+uv = "latest"

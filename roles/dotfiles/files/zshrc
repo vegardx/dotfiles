@@ -1,0 +1,24 @@
+# vim: ft=zsh
+
+# Pretty warnings
+function _zwarn { print -P "%F{196}WARNING%F{208} ~>%f $1" }
+
+# Modules (order matters: shell → prompt → plugins)
+for _mod in shell prompt plugins; do
+  source "${HOME}/.zsh/${_mod}.zsh" || _zwarn "Could not source ~/.zsh/${_mod}.zsh"
+done
+unset _mod
+
+# Ghostty dynamic title
+function _title_branch() { git -C "$PWD" rev-parse --abbrev-ref HEAD 2>/dev/null }
+function _title_precmd()  {
+  local branch=$(_title_branch)
+  printf '\e]0;Terminal: %s%s\a' "${PWD/#$HOME/~}" "${branch:+ ($branch)}"
+}
+function _title_preexec() {
+  local branch=$(_title_branch)
+  printf '\e]0;%s — %s%s\a' "${1%% *}" "${PWD/#$HOME/~}" "${branch:+ ($branch)}"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd  _title_precmd
+add-zsh-hook preexec _title_preexec
