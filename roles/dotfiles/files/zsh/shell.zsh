@@ -37,6 +37,50 @@ alias grep='grep --color=auto'
 alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true  && killall Finder"
 alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
+# ── Functions ─────────────────────────────────────────────────────────
+# Clone a repo into ~/src/<host>/<org>/<repo> and cd into it
+function clone() {
+  local url="$1"
+  [[ -z "$url" ]] && { echo "usage: clone <git-url>" >&2; return 1 }
+
+  local host path
+
+  case "$url" in
+    git@*:*)       # git@github.com:org/repo.git
+      host="${${url#git@}%%:*}"
+      path="${url#*:}"
+      ;;
+    ssh://*)       # ssh://git@host/org/repo.git
+      host="${${url#ssh://*/}%%/*}"
+      host="${${url#ssh://}%%/*}"
+      host="${host#*@}"
+      path="${url#ssh://*${host}/}"
+      ;;
+    https://*|http://*)  # https://github.com/org/repo.git
+      host="${${url#http*://}%%/*}"
+      path="${url#http*://${host}/}"
+      ;;
+    *)
+      echo "clone: unrecognized URL format: $url" >&2
+      return 1
+      ;;
+  esac
+
+  # Strip .git suffix
+  path="${path%.git}"
+
+  local target="${HOME}/src/${host}/${path}"
+
+  if [[ -d "$target" ]]; then
+    echo "Already exists: $target"
+    cd "$target"
+    return 0
+  fi
+
+  mkdir -p "$(dirname "$target")"
+  git clone "$url" "$target" && cd "$target"
+}
+
 # ── Ghostty integration ───────────────────────────────────────────────
 if [[ -n $GHOSTTY_RESOURCES_DIR ]]; then
   source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
