@@ -9,6 +9,15 @@
   when: macos_dark_mode
   notify: restart dock
 
+- name: "Appearance: install wallpaper CLI"
+  community.general.homebrew:
+    name: wallpaper
+    state: present
+
+- name: "Appearance: solid black wallpaper"
+  ansible.builtin.command: wallpaper set-solid-color "{{ macos_wallpaper_color }}"
+  changed_when: true
+
 # ── Dock ──────────────────────────────────────────────────────────────
 - name: "Dock: autohide"
   community.general.osx_defaults:

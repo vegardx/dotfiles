@@ -1,6 +1,7 @@
 ---
 # Appearance
 macos_dark_mode: true
+macos_wallpaper_color: "000000"
 
 # Dock
 macos_dock_autohide: true
