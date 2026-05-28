@@ -1,2 +1,146 @@
 ---
-# macOS defaults
+# ── Dock ──────────────────────────────────────────────────────────────
+- name: "Dock: autohide"
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: "{{ macos_dock_autohide }}"
+  notify: restart dock
+
+- name: "Dock: tile size"
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: tilesize
+    type: int
+    value: "{{ macos_dock_tilesize }}"
+  notify: restart dock
+
+- name: "Dock: show recents"
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: show-recents
+    type: bool
+    value: "{{ macos_dock_show_recents }}"
+  notify: restart dock
+
+- name: "Dock: minimize to application"
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: minimize-to-application
+    type: bool
+    value: "{{ macos_dock_minimize_to_application }}"
+  notify: restart dock
+
+# ── Keyboard ──────────────────────────────────────────────────────────
+- name: "Keyboard: key repeat rate"
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: KeyRepeat
+    type: int
+    value: "{{ macos_key_repeat }}"
+
+- name: "Keyboard: initial key repeat delay"
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: InitialKeyRepeat
+    type: int
+    value: "{{ macos_initial_key_repeat }}"
+
+# ── Finder ────────────────────────────────────────────────────────────
+- name: "Finder: show all file extensions"
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    type: bool
+    value: "{{ macos_finder_show_all_extensions }}"
+  notify: restart finder
+
+- name: "Finder: default view style (column)"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: FXPreferredViewStyle
+    type: string
+    value: "{{ macos_finder_view_style }}"
+  notify: restart finder
+
+- name: "Finder: search current folder by default"
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: FXDefaultSearchScope
+    type: string
+    value: "{{ macos_finder_search_scope }}"
+  notify: restart finder
+
+# ── Trackpad ──────────────────────────────────────────────────────────
+- name: "Trackpad: tap to click"
+  community.general.osx_defaults:
+    domain: com.apple.AppleMultitouchTrackpad
+    key: Clicking
+    type: bool
+    value: "{{ macos_trackpad_tap_to_click }}"
+
+- name: "Trackpad: disable natural scrolling"
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: com.apple.swipescrolldirection
+    type: bool
+    value: "{{ macos_natural_scrolling }}"
+
+# ── Window Manager ────────────────────────────────────────────────────
+- name: "Window Manager: disable Stage Manager"
+  community.general.osx_defaults:
+    domain: com.apple.WindowManager
+    key: GloballyEnabled
+    type: bool
+    value: "{{ macos_stage_manager }}"
+  notify: restart dock
+
+# ── Screenshots ───────────────────────────────────────────────────────
+- name: "Screenshots: capture style"
+  community.general.osx_defaults:
+    domain: com.apple.screencapture
+    key: style
+    type: string
+    value: "{{ macos_screenshot_style }}"
+
+- name: "Screenshots: enable video"
+  community.general.osx_defaults:
+    domain: com.apple.screencapture
+    key: video
+    type: bool
+    value: "{{ macos_screenshot_video }}"
+
+# ── Dock arrangement (dockutil) ───────────────────────────────────────
+- name: Check if dockutil is installed
+  ansible.builtin.command: which dockutil
+  register: dockutil_check
+  changed_when: false
+  failed_when: false
+
+- name: Install dockutil
+  community.general.homebrew:
+    name: dockutil
+    state: present
+  when: dockutil_check.rc != 0
+
+- name: Remove all dock items
+  ansible.builtin.command: dockutil --remove all --no-restart
+  changed_when: true
+  when: macos_dock_apps | length > 0
+
+- name: Add dock apps
+  ansible.builtin.command: "dockutil --add '{{ item }}' --no-restart"
+  loop: "{{ macos_dock_apps }}"
+  changed_when: true
+  notify: restart dock
+
+# ── Login items ───────────────────────────────────────────────────────
+- name: Add login items
+  ansible.builtin.command: >
+    osascript -e 'tell application "System Events" to make login item at end
+    with properties {name:"{{ item }}", path:"/Applications/{{ item }}.app", hidden:true}'
+  loop: "{{ macos_login_items }}"
+  register: login_item_result
+  changed_when: login_item_result.rc == 0
+  failed_when: false

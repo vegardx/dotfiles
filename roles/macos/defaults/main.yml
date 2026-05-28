@@ -1,0 +1,42 @@
+---
+# Dock
+macos_dock_autohide: true
+macos_dock_tilesize: 59
+macos_dock_show_recents: false
+macos_dock_minimize_to_application: true
+
+# Keyboard
+macos_key_repeat: 2
+macos_initial_key_repeat: 15
+
+# Finder
+macos_finder_show_all_extensions: true
+macos_finder_view_style: clmv
+macos_finder_search_scope: SCcf
+
+# Trackpad
+macos_trackpad_tap_to_click: true
+macos_natural_scrolling: false
+
+# Window Manager
+macos_stage_manager: false
+
+# Screenshots
+macos_screenshot_style: window
+macos_screenshot_video: true
+
+# Dock apps (managed by dockutil)
+macos_dock_apps:
+  - /Applications/Zen.app
+  - /System/Applications/Safari.app
+  - /Applications/Ghostty.app
+  - /Applications/Zed.app
+  - /Applications/Visual Studio Code - Insiders.app
+  - /Applications/Slack.app
+  - /System/Applications/Messages.app
+
+# Login items
+macos_login_items:
+  - Hidden Bar
+  - Rectangle
+  - SensibleSideButtons
