@@ -33,9 +33,9 @@
     state: directory
     mode: "0700"
 
-- name: Ensure ~/.pi/agent directory exists
+- name: Ensure ~/.config/pi/agent directory exists
   ansible.builtin.file:
-    path: "{{ ansible_facts.env.HOME }}/.pi/agent"
+    path: "{{ ansible_facts.env.HOME }}/.config/pi/agent"
     state: directory
     mode: "0755"
 
@@ -103,7 +103,7 @@
 - name: Symlink pi agent configs
   ansible.builtin.file:
     src: "{{ role_path }}/files/pi/agent/{{ item }}"
-    dest: "{{ ansible_facts.env.HOME }}/.pi/agent/{{ item }}"
+    dest: "{{ ansible_facts.env.HOME }}/.config/pi/agent/{{ item }}"
     state: link
     force: true
   loop:
