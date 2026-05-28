@@ -45,6 +45,64 @@ function clone() {
   [[ -z "$url" ]] && { echo "usage: clone <git-url-or-browser-url>" >&2; return 1 }
 
   local host path
+  _parse_git_url "$url" || return 1
+
+  local target="${HOME}/src/${host}/${path}"
+
+  if [[ -d "$target" ]]; then
+    echo "Already exists: $target"
+    cd "$target"
+    return 0
+  fi
+
+  local clone_url
+  _build_clone_url "$url"
+
+  mkdir -p "$(dirname "$target")"
+  git clone "$clone_url" "$target" && cd "$target"
+}
+
+# Fork a repo, clone to original org's path, set origin=fork upstream=original.
+function fork() {
+  local url="$1"
+  [[ -z "$url" ]] && { echo "usage: fork <git-url-or-browser-url>" >&2; return 1 }
+
+  command -v gh &>/dev/null || { echo "fork: gh CLI required" >&2; return 1 }
+
+  local host path
+  _parse_git_url "$url" || return 1
+
+  local target="${HOME}/src/${host}/${path}"
+
+  if [[ -d "$target" ]]; then
+    echo "Already exists: $target"
+    cd "$target"
+    return 0
+  fi
+
+  # Fork on GitHub (idempotent — no-op if already forked)
+  gh repo fork "${host}/${path}" --clone=false
+
+  # Get the fork's SSH URL
+  local gh_user
+  gh_user=$(gh api user --jq .login)
+  local fork_url="git@${host}:${gh_user}/${path##*/}.git"
+  local upstream_url="git@${host}:${path}.git"
+
+  mkdir -p "$(dirname "$target")"
+  git clone "$fork_url" "$target" && cd "$target"
+
+  # Set upstream to original repo
+  git remote add upstream "$upstream_url"
+  git remote set-url origin "$fork_url"
+
+  echo "\nRemotes:"
+  git remote -v
+}
+
+# Helper: parse a git URL into $host and $path (org/repo only)
+function _parse_git_url() {
+  local url="$1"
 
   case "$url" in
     git@*:*)       # git@github.com:org/repo.git
@@ -61,7 +119,7 @@ function clone() {
       path="${url#http*://${host}/}"
       ;;
     *)
-      echo "clone: unrecognized URL format: $url" >&2
+      echo "unrecognized URL format: $url" >&2
       return 1
       ;;
   esac
@@ -73,29 +131,23 @@ function clone() {
   # Keep only org/repo (first two path segments)
   local segments=(${(s:/:)path})
   if (( ${#segments[@]} < 2 )); then
-    echo "clone: can't determine org/repo from: $url" >&2
+    echo "can't determine org/repo from: $url" >&2
     return 1
   fi
   path="${segments[1]}/${segments[2]}"
+}
 
-  local target="${HOME}/src/${host}/${path}"
-
-  if [[ -d "$target" ]]; then
-    echo "Already exists: $target"
-    cd "$target"
-    return 0
-  fi
-
-  # Construct clone URL from host/path if input was a browser URL
-  local clone_url="$url"
+# Helper: build a clone-friendly URL from the parsed host/path
+function _build_clone_url() {
+  local url="$1"
   case "$url" in
     https://*|http://*)
       clone_url="https://${host}/${path}.git"
       ;;
+    *)
+      clone_url="$url"
+      ;;
   esac
-
-  mkdir -p "$(dirname "$target")"
-  git clone "$clone_url" "$target" && cd "$target"
 }
 
 # ── Ghostty integration ───────────────────────────────────────────────
