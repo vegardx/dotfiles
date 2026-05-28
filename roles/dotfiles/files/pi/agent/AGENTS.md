@@ -8,7 +8,7 @@ This context block is assembled from multiple AGENTS.md files found by
 walking the directory tree from the current working directory up to home.
 Each section below a top-level heading (`#`) comes from a different file.
 More specific files (closer to cwd) appear later and can refine or override
-earlier guidance. The heading indicates the file's path and scope.
+earlier guidance. When two files contradict each other, the later one wins.
 
 ## Communication
 - Be concise and direct. No filler words or preamble.
