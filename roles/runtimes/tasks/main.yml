@@ -2,7 +2,7 @@
 # ── Directory structure ───────────────────────────────────────────────
 - name: Create directory structure
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/{{ item }}"
+    path: "{{ ansible_facts.env.HOME }}/{{ item }}"
     state: directory
     mode: "0755"
   loop:
@@ -15,26 +15,26 @@
     eval "$(/opt/homebrew/bin/mise activate bash)"
     mise use --global node@22 go@1.26 terraform@1.9 uv@latest tflint@latest
   args:
-    creates: "{{ ansible_env.HOME }}/.local/share/mise/installs/node"
+    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/node"
 
 # ── Docker CLI plugins ────────────────────────────────────────────────
 - name: Ensure ~/.docker/cli-plugins directory exists
   ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.docker/cli-plugins"
+    path: "{{ ansible_facts.env.HOME }}/.docker/cli-plugins"
     state: directory
     mode: "0755"
 
 - name: Symlink docker-compose plugin
   ansible.builtin.file:
     src: "/opt/homebrew/opt/docker-compose/bin/docker-compose"
-    dest: "{{ ansible_env.HOME }}/.docker/cli-plugins/docker-compose"
+    dest: "{{ ansible_facts.env.HOME }}/.docker/cli-plugins/docker-compose"
     state: link
     force: true
 
 - name: Symlink docker-buildx plugin
   ansible.builtin.file:
     src: "/opt/homebrew/opt/docker-buildx/bin/docker-buildx"
-    dest: "{{ ansible_env.HOME }}/.docker/cli-plugins/docker-buildx"
+    dest: "{{ ansible_facts.env.HOME }}/.docker/cli-plugins/docker-buildx"
     state: link
     force: true
 
@@ -44,7 +44,7 @@
     eval "$(/opt/homebrew/bin/mise activate bash)"
     npm install -g {{ item }}
   args:
-    creates: "{{ ansible_env.HOME }}/.local/share/mise/installs/node/22/lib/node_modules/{{ item.split('/')[-1] }}"
+    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/node/22/lib/node_modules/{{ item.split('/')[-1] }}"
   loop:
     - "@earendil-works/pi-coding-agent"
     - codeburn
@@ -53,7 +53,7 @@
 - name: Install gh extensions
   ansible.builtin.shell: gh extension install {{ item }}
   args:
-    creates: "{{ ansible_env.HOME }}/.local/share/gh/extensions/{{ item.split('/')[-1] }}"
+    creates: "{{ ansible_facts.env.HOME }}/.local/share/gh/extensions/{{ item.split('/')[-1] }}"
   loop:
     - agbiotech/gh-sub-issue
 
