@@ -37,14 +37,14 @@
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: KeyRepeat
-    type: int
+    type: float
     value: "{{ macos_key_repeat }}"
 
 - name: "Keyboard: initial key repeat delay"
   community.general.osx_defaults:
     domain: NSGlobalDomain
     key: InitialKeyRepeat
-    type: int
+    type: float
     value: "{{ macos_initial_key_repeat }}"
 
 # ── Finder ────────────────────────────────────────────────────────────
