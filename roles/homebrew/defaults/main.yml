@@ -1,0 +1,65 @@
+---
+homebrew_formulae:
+  # Core CLI
+  - coreutils
+  - fd
+  - fzf
+  - ripgrep
+  - wget
+  - shfmt
+
+  # Shell
+  - zsh
+  - zsh-autosuggestions
+  - atuin
+
+  # Dev
+  - gh
+  - git-lfs
+  - git-filter-repo
+  - pre-commit
+  - actionlint
+  - mise
+
+  # Languages
+  - ruff
+
+  # Go
+  - golangci-lint
+
+  # Infra
+  - awscli
+  - azure-cli
+  - terraform-docs
+  - tflint
+
+  # Security
+  - pass-otp
+  - pinentry-mac
+  - zizmor
+  - act
+
+homebrew_casks:
+  # Browsers
+  - google-chrome
+  - zen
+
+  # Dev
+  - ghostty
+  - zed
+  - visual-studio-code
+  - visual-studio-code@insiders
+  - claude
+  - codex
+  - github-copilot-app
+
+  # Productivity
+  - rectangle
+  - contexts
+  - slack
+  - discord
+
+  # Utils
+  - betterdisplay
+  - sensiblesidebuttons
+  - hiddenbar
