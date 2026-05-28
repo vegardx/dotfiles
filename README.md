@@ -53,6 +53,7 @@ After running the playbook, add Keychain entries:
 
 ```bash
 security add-generic-password -a $LOGNAME -s exa-api-key -w "<value>"
+security add-generic-password -a $LOGNAME -s context7-api-key -w "<value>"  # optional, for higher rate limits
 ```
 
 ## Post-setup
