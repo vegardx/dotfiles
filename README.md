@@ -6,7 +6,7 @@ Ansible playbook to set up a fresh macOS machine.
 
 ```bash
 # On a fresh Mac — one command to rule them all
-curl -fsSL https://raw.githubusercontent.com/vegardx/dotfiles/main/bootstrap.sh | bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/vegardx/dotfiles/main/bootstrap.sh)"
 ```
 
 This installs Xcode CLI tools, Homebrew, git, and Ansible, clones this repo to `~/src/github.com/vegardx/dotfiles/`, then runs the full playbook.
