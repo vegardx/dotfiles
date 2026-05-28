@@ -1,0 +1,15 @@
+---
+- name: Bootstrap macOS
+  hosts: localhost
+  connection: local
+  gather_facts: true
+
+  roles:
+    - role: homebrew
+      tags: [homebrew]
+    - role: dotfiles
+      tags: [dotfiles]
+    - role: macos
+      tags: [macos]
+    - role: runtimes
+      tags: [runtimes]

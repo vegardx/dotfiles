@@ -1,0 +1,17 @@
+# Ansible
+*.retry
+collections/
+
+# Secrets
+*.key
+*.pem
+.env*
+hosts.yml
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
