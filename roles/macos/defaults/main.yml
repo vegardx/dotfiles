@@ -1,4 +1,7 @@
 ---
+# Appearance
+macos_dark_mode: true
+
 # Dock
 macos_dock_autohide: true
 macos_dock_tilesize: 59

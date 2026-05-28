@@ -1,4 +1,14 @@
 ---
+# ── Appearance ────────────────────────────────────────────────────────
+- name: "Appearance: dark mode"
+  community.general.osx_defaults:
+    domain: NSGlobalDomain
+    key: AppleInterfaceStyle
+    type: string
+    value: Dark
+  when: macos_dark_mode
+  notify: restart dock
+
 # ── Dock ──────────────────────────────────────────────────────────────
 - name: "Dock: autohide"
   community.general.osx_defaults:
