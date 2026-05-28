@@ -1,14 +1,21 @@
-# bootstrap
+# dotfiles
 
 Ansible playbook to set up a fresh macOS machine.
 
 ## Quick start
 
 ```bash
-# On a fresh Mac — installs Xcode CLI tools, Homebrew, Ansible, then runs the playbook
-./bootstrap.sh
+# On a fresh Mac — one command to rule them all
+curl -fsSL https://raw.githubusercontent.com/vegardx/dotfiles/main/bootstrap.sh | bash
+```
 
-# Or if you already have Ansible
+This installs Xcode CLI tools, Homebrew, git, and Ansible, clones this repo to `~/src/github.com/vegardx/dotfiles/`, then runs the full playbook.
+
+## Updating
+
+```bash
+cd ~/src/github.com/vegardx/dotfiles
+git pull
 make run
 ```
 
@@ -47,6 +54,16 @@ After running the playbook, add Keychain entries:
 ```bash
 security add-generic-password -a $LOGNAME -s exa-api-key -w "<value>"
 ```
+
+## Post-setup
+
+Manual steps after the playbook completes:
+
+1. `gh auth login` — authenticate GitHub CLI
+2. `gpg --import /path/to/private-key.asc` — import GPG key
+3. `colima start` — start Docker runtime
+4. `atuin login` — sync shell history (optional)
+5. Log out and back in for login items to take effect
 
 ## Requirements
 
