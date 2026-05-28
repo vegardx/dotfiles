@@ -14,14 +14,9 @@ if ! command -v brew &>/dev/null; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-echo "==> Installing uv..."
-if ! command -v uv &>/dev/null; then
-  brew install uv
-fi
-
 echo "==> Installing Ansible..."
 if ! command -v ansible-playbook &>/dev/null; then
-  uv tool install ansible-core
+  brew install ansible
 fi
 
 echo "==> Installing Ansible collections..."

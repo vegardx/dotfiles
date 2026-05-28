@@ -5,7 +5,7 @@ Ansible playbook to set up a fresh macOS machine.
 ## Quick start
 
 ```bash
-# On a fresh Mac — installs Xcode CLI tools, Homebrew, uv, Ansible, then runs the playbook
+# On a fresh Mac — installs Xcode CLI tools, Homebrew, Ansible, then runs the playbook
 ./bootstrap.sh
 
 # Or if you already have Ansible
