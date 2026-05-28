@@ -32,7 +32,7 @@ macos_screenshot_video: true
 # Dock apps (managed by dockutil)
 macos_dock_apps:
   - /Applications/Zen.app
-  - /System/Applications/Safari.app
+  - /Applications/Safari.app
   - /Applications/Ghostty.app
   - /Applications/Zed.app
   - /Applications/Visual Studio Code - Insiders.app
