@@ -40,3 +40,21 @@ When creating directories that hold secrets (gnupg, ssh), always set explicit
 - macOS stores many numeric preferences as floats internally. When in doubt,
   use `type: float` for numeric `osx_defaults` values to avoid type mismatch
   errors.
+
+## Ansible conventions
+- Use `ansible_facts.env.HOME`, never `ansible_env.HOME` (deprecated in 2.24).
+- `inject_facts_as_vars = false` is set in `ansible.cfg`.
+- Use FQCNs for all modules (e.g. `ansible.builtin.file`, not `file`).
+
+## File layout
+Dotfiles in `roles/dotfiles/files/` mirror the XDG target structure:
+- `config/` → `~/.config/` (git, zsh, ghostty, gnupg, mise, gh, pi)
+- `src/` → `~/src/` (AGENTS.md hierarchy)
+- `ssh/` → `~/.ssh/`
+- `zshenv-bootstrap` → `~/.zshenv` (the only file that stays in home)
+
+## Running
+- `make run` — full playbook run
+- `make check` — dry run with diff
+- `make lint` — ansible-lint
+- `make bootstrap` — fresh machine setup (installs Ansible first)
