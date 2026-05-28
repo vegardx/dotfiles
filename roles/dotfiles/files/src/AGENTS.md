@@ -3,11 +3,12 @@
 Applies to every repo regardless of host or org.
 
 ## Git workflow
-- Work in feature branches, never directly on `main`.
+- Work in feature branches, never directly on the default branch.
 - Keep commits small and focused — one logical change per commit.
 - Keep PRs focused on a single concern. Split unrelated changes.
-- Rebase or merge main into a branch to resolve conflicts; don't force-push
-  shared branches.
+- Rebase or merge the default branch into a feature branch to resolve
+  conflicts; don't force-push shared branches.
+- Discover the default branch with `gh repo view --json defaultBranchRef -q .defaultBranchRef.name`.
 
 ## Commit conventions
 - Conventional commits: `type(scope): subject` — subject ≤ 72 chars.

@@ -5,4 +5,4 @@ collaborators or a broader audience but are still personal in nature.
 
 ## Conventions
 - Same standards as vegardx/ personal repos.
-- Branch protection on `main` when collaborators are added.
+- Branch protection on the default branch when collaborators are added.

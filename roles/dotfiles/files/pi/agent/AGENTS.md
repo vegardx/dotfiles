@@ -29,12 +29,12 @@ Mode-aware. Pi has three modes: **plan** (read-only planning), **ask**
   logical phase, push and open a PR — don't batch many phases into one
   unreviewed pile. Still ask before the things below.
 - **Hack mode**: full tool access, no plan structure. Just do the work
-  directly — commit and push to whatever branch is active (including main
-  for quick fixes). No need to create feature branches for small changes.
-  Still ask before the things below.
+  directly — commit and push to whatever branch is active (including the
+  default branch for quick fixes). No need to create feature branches for
+  small changes. Still ask before the things below.
 
 Always ask, regardless of mode:
-- Force-pushing to `main` or any shared branch.
+- Force-pushing to the default branch or any shared branch.
 - `rm -rf` outside the current repo, database drops, destroying volumes.
 - Anything touching `.env` files or files that look like they contain
   secrets — never read, edit, or commit them.
