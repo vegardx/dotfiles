@@ -38,10 +38,11 @@ alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true  &
 alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # ── Functions ─────────────────────────────────────────────────────────
-# Clone a repo into ~/src/<host>/<org>/<repo> and cd into it
+# Clone a repo into ~/src/<host>/<org>/<repo> and cd into it.
+# Accepts git URLs, HTTPS URLs, or plain browser URLs.
 function clone() {
   local url="$1"
-  [[ -z "$url" ]] && { echo "usage: clone <git-url>" >&2; return 1 }
+  [[ -z "$url" ]] && { echo "usage: clone <git-url-or-browser-url>" >&2; return 1 }
 
   local host path
 
@@ -51,12 +52,11 @@ function clone() {
       path="${url#*:}"
       ;;
     ssh://*)       # ssh://git@host/org/repo.git
-      host="${${url#ssh://*/}%%/*}"
       host="${${url#ssh://}%%/*}"
       host="${host#*@}"
       path="${url#ssh://*${host}/}"
       ;;
-    https://*|http://*)  # https://github.com/org/repo.git
+    https://*|http://*)  # https://github.com/org/repo[/tree/main/...]
       host="${${url#http*://}%%/*}"
       path="${url#http*://${host}/}"
       ;;
@@ -66,8 +66,17 @@ function clone() {
       ;;
   esac
 
-  # Strip .git suffix
+  # Strip .git suffix and trailing slash
   path="${path%.git}"
+  path="${path%/}"
+
+  # Keep only org/repo (first two path segments)
+  local segments=(${(s:/:)path})
+  if (( ${#segments[@]} < 2 )); then
+    echo "clone: can't determine org/repo from: $url" >&2
+    return 1
+  fi
+  path="${segments[1]}/${segments[2]}"
 
   local target="${HOME}/src/${host}/${path}"
 
@@ -77,8 +86,16 @@ function clone() {
     return 0
   fi
 
+  # Construct clone URL from host/path if input was a browser URL
+  local clone_url="$url"
+  case "$url" in
+    https://*|http://*)
+      clone_url="https://${host}/${path}.git"
+      ;;
+  esac
+
   mkdir -p "$(dirname "$target")"
-  git clone "$url" "$target" && cd "$target"
+  git clone "$clone_url" "$target" && cd "$target"
 }
 
 # ── Ghostty integration ───────────────────────────────────────────────
