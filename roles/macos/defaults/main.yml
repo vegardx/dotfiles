@@ -47,5 +47,5 @@ macos_dock_apps:
 macos_login_items:
   - Hidden Bar
   - Rectangle
-  - SensibleSideButtons
+  - SaneSideButtons
   - Stats
