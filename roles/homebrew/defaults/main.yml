@@ -27,6 +27,13 @@ homebrew_formulae:
   # Go
   - golangci-lint
 
+  # Containers
+  - colima
+  - docker
+  - docker-compose
+  - docker-buildx
+  - docker-credential-helper
+
   # Infra
   - awscli
   - azure-cli
