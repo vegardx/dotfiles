@@ -12,7 +12,7 @@
   community.general.osx_defaults:
     domain: com.apple.dock
     key: tilesize
-    type: int
+    type: float
     value: "{{ macos_dock_tilesize }}"
   notify: restart dock
 
