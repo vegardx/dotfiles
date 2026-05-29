@@ -4,6 +4,9 @@
 
 typeset -U path PATH fpath FPATH
 
+# Ensure system paths are always present
+PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+
 # Core env
 export EDITOR=nano
 export PAGER=less
