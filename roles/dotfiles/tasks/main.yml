@@ -23,6 +23,7 @@
     - .config/ghostty/themes
     - .config/mise
     - .config/gh
+    - .config/ssl
 
 - name: Ensure XDG data directories exist
   ansible.builtin.file:
@@ -115,6 +116,7 @@
     - ghostty/themes/catppuccin-macchiato.conf
     - mise/config.toml
     - gh/config.yml
+    - ssl/zscaler.pem
 
 # ── Pi agent ─────────────────────────────────────────────────────────
 - name: Symlink pi agent configs

@@ -42,3 +42,6 @@ export GREP_COLORS="38;5;230:sl=38;5;240:cs=38;5;100:mt=38;5;161:fn=38;5;197:ln=
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+
+# CA certificates (Zscaler corporate proxy)
+export NODE_EXTRA_CA_CERTS="$XDG_CONFIG_HOME/ssl/zscaler.pem"
