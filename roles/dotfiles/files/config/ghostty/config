@@ -9,3 +9,4 @@ theme = Catppuccin Macchiato
 font-family = "Menlo"
 font-size = 16
 keybind = shift+enter=text:\x1b\r
+keybind = super+enter=toggle_split_zoom
