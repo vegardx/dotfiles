@@ -55,6 +55,8 @@
     creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/node/22/lib/node_modules/{{ item.split('/')[-1] }}"
   loop:
     - "@earendil-works/pi-coding-agent"
+    - "@anthropic-ai/claude-code"
+    - "@openai/codex"
     - codeburn
 
 # ── gh extensions ─────────────────────────────────────────────────────
