@@ -10,7 +10,6 @@
     - .gitconfig
     - .gnupg/gpg.conf
     - .gnupg/gpg-agent.conf
-    - .pi/agent/settings.json
     - .pi/agent/AGENTS.md
     - .pi/agent/keybindings.json
     - .zsh
@@ -129,7 +128,6 @@
     state: link
     force: true
   loop:
-    - settings.json
     - AGENTS.md
     - keybindings.json
 
