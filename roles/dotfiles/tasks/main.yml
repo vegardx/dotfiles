@@ -1,4 +1,15 @@
 ---
+# NOTE: If you move a config file to a new location, add the OLD path here
+# temporarily to clean up stale symlinks on machines that already ran the playbook.
+# Remove entries once all machines have been updated.
+#
+# - name: Remove stale symlinks from previous locations
+#   ansible.builtin.file:
+#     path: "{{ ansible_facts.env.HOME }}/{{ item }}"
+#     state: absent
+#   loop:
+#     - .old/path/here
+
 # ── XDG directories ──────────────────────────────────────────────────
 - name: Ensure XDG config subdirectories exist
   ansible.builtin.file:
