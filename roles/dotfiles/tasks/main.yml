@@ -1,19 +1,4 @@
 ---
-# ── Cleanup legacy paths ──────────────────────────────────────────────
-- name: Remove legacy dotfile symlinks
-  ansible.builtin.file:
-    path: "{{ ansible_facts.env.HOME }}/{{ item }}"
-    state: absent
-  loop:
-    - .zshrc
-    - .zprofile
-    - .gitconfig
-    - .gnupg/gpg.conf
-    - .gnupg/gpg-agent.conf
-    - .pi/agent/AGENTS.md
-    - .pi/agent/keybindings.json
-    - .zsh
-
 # ── XDG directories ──────────────────────────────────────────────────
 - name: Ensure XDG config subdirectories exist
   ansible.builtin.file:
