@@ -15,9 +15,9 @@
 - name: Install mise global tools
   ansible.builtin.shell: |
     eval "$(/opt/homebrew/bin/mise activate bash)"
-    mise use --global node@22 go@1.26 terraform@1.9.8 uv@latest tflint@latest
-  args:
-    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/node"
+    mise install
+  register: mise_install
+  changed_when: "'all tools are installed' not in mise_install.stderr"
 
 # ── Docker CLI plugins ────────────────────────────────────────────────
 - name: Ensure ~/.docker/cli-plugins directory exists
@@ -57,7 +57,7 @@
     eval "$(/opt/homebrew/bin/mise activate bash)"
     npm install -g {{ item }}
   args:
-    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/node/22/lib/node_modules/{{ item.split('/')[-1] }}"
+    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/node/24/lib/node_modules/{{ item.split('/')[-1] }}"
   loop:
     - "@earendil-works/pi-coding-agent"
     - "@anthropic-ai/claude-code"
