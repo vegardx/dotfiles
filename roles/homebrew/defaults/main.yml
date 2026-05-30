@@ -56,7 +56,7 @@ homebrew_casks:
   - visual-studio-code
   - visual-studio-code@insiders
   - claude
-  - codex
+  - codex-app
   - github-copilot-app
 
   # Productivity
