@@ -46,6 +46,11 @@
   args:
     creates: "{{ ansible_facts.env.HOME }}/Library/LaunchAgents/homebrew.mxcl.colima.plist"
 
+- name: Start ollama on login
+  ansible.builtin.command: brew services start ollama
+  args:
+    creates: "{{ ansible_facts.env.HOME }}/Library/LaunchAgents/homebrew.mxcl.ollama.plist"
+
 # ── Global npm packages ───────────────────────────────────────────────
 - name: Install global npm packages
   ansible.builtin.shell: |

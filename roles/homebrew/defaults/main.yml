@@ -45,6 +45,15 @@ homebrew_formulae:
   - zizmor
   - act
 
+  # Local LLM
+  - ollama
+
+# Formulae to remove from machines that previously had them installed.
+# Kept here (rather than just deleted from the list above) so existing
+# machines uninstall them on the next run.
+homebrew_formulae_absent:
+  - wallpaper
+
 homebrew_casks:
   # Browsers
   - google-chrome
@@ -70,3 +79,9 @@ homebrew_casks:
   - sanesidebuttons
   - hiddenbar
   - stats
+
+# Casks to remove from machines that previously had them installed.
+# The codex CLI is provided via npm (@openai/codex) for consistency with
+# claude/pi; only the GUI app (codex-app) comes from Homebrew.
+homebrew_casks_absent:
+  - codex

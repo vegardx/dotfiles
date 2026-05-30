@@ -14,3 +14,15 @@
     name: "{{ item }}"
     state: present
   loop: "{{ homebrew_casks }}"
+
+- name: Remove deprecated Homebrew formulae
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ homebrew_formulae_absent | default([]) }}"
+
+- name: Remove deprecated Homebrew casks
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ homebrew_casks_absent | default([]) }}"
