@@ -65,12 +65,12 @@
     - codeburn
 
 # ── gh extensions ─────────────────────────────────────────────────────
-- name: Install gh extensions
-  ansible.builtin.shell: gh extension install {{ item }}
+# gh-sub-issue was unused: /park links sub-issues via GitHub's native
+# sub_issues REST API directly. Remove it from machines that still have it.
+- name: Remove deprecated gh-sub-issue extension
+  ansible.builtin.command: gh extension remove sub-issue
   args:
-    creates: "{{ ansible_facts.env.HOME }}/.local/share/gh/extensions/{{ item.split('/')[-1] }}"
-  loop:
-    - agbiotech/gh-sub-issue
+    removes: "{{ ansible_facts.env.HOME }}/.local/share/gh/extensions/gh-sub-issue"
 
 # ── Post-setup message ────────────────────────────────────────────────
 - name: Display post-setup reminders
