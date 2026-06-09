@@ -20,3 +20,5 @@
 
 [includeIf "gitdir:~/src/dnb.ghe.com/"]
 	path = ~/.config/git/config-dnb
+[init]
+	defaultBranch = main
