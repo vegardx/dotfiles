@@ -57,11 +57,12 @@
     eval "$(/opt/homebrew/bin/mise activate bash)"
     npm install -g {{ item }}
   args:
-    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/node/24/lib/node_modules/{{ item.split('/')[-1] }}"
+    creates: "{{ ansible_facts.env.HOME }}/.local/share/mise/installs/node/24/lib/node_modules/{{ item }}"
   loop:
     - "@earendil-works/pi-coding-agent"
     - "@anthropic-ai/claude-code"
     - "@openai/codex"
+    - "@github/copilot"
     - codeburn
 
 # ── gh extensions ─────────────────────────────────────────────────────
