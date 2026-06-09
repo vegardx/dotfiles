@@ -7,6 +7,105 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "git": {
+    "blame": {
+      "show_avatar": false
+    },
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+  "use_system_window_tabs": false,
+  "preview_tabs": {
+    "enable_preview_from_project_panel": false,
+    "enabled": false
+  },
+  "tabs": {
+    "close_position": "right",
+    "git_status": false
+  },
+  "tab_bar": {
+    "show_tab_bar_buttons": false,
+    "show_nav_history_buttons": false,
+    "show": true
+  },
+  "title_bar": {
+    "show_project_items": true,
+    "show_onboarding_banner": false,
+    "show_sign_in": false,
+    "show_user_menu": false,
+    "show_user_picture": false,
+    "show_branch_status_icon": false,
+    "show_branch_name": true
+  },
+  "debugger": {
+    "button": false
+  },
+  "search": {
+    "button": false
+  },
+  "diagnostics": {
+    "button": false
+  },
+  "status_bar": {
+    "show_active_file": false,
+    "cursor_position_button": false
+  },
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "terminal": {
+    "toolbar": {
+      "breadcrumbs": false
+    },
+    "cursor_shape": "block",
+    "button": true,
+    "shell": {
+      "program": "/opt/homebrew/bin/zsh"
+    }
+  },
+  "project_panel": {
+    "hide_root": false,
+    "indent_guides": {
+      "show": "never"
+    },
+    "git_status_indicator": false,
+    "bold_folder_labels": false,
+    "auto_reveal_entries": true,
+    "indent_size": 20.0,
+    "folder_icons": false,
+    "file_icons": false,
+    "dock": "left"
+  },
+  "agent": {
+    "default_profile": "write",
+    "limit_content_width": false,
+    "default_width": 560.0,
+    "flexible": false,
+    "button": true,
+    "show_turn_stats": true,
+    "thinking_display": "preview",
+    "notify_when_agent_waiting": "never",
+    "enable_feedback": false,
+    "sidebar_side": "right",
+    "dock": "right",
+    "default_model": {
+      "provider": "ollama",
+      "model": "qwen3-coder-next:q8_0",
+      "enable_thinking": false
+    },
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "edit_predictions": {
+    "ollama": {
+      "max_output_tokens": 64,
+      "prompt_format": "infer",
+      "model": "qwen3-coder-next:q8_0"
+    },
+    "provider": "ollama"
+  },
+  "cli_default_open_behavior": "existing_window",
   "icon_theme": {
     "mode": "dark",
     "light": "Zed (Default)",
