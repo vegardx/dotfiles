@@ -15,3 +15,6 @@ hosts.yml
 __pycache__/
 *.pyc
 .venv/
+
+# pi local session
+.pi/
