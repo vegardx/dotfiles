@@ -44,10 +44,10 @@ function clone() {
   local url="$1"
   [[ -z "$url" ]] && { echo "usage: clone <git-url-or-browser-url>" >&2; return 1 }
 
-  local host path
+  local host repo
   _parse_git_url "$url" || return 1
 
-  local target="${HOME}/src/${host}/${path}"
+  local target="${HOME}/src/${host}/${repo}"
 
   if [[ -d "$target" ]]; then
     echo "Already exists: $target"
@@ -69,10 +69,10 @@ function fork() {
 
   command -v gh &>/dev/null || { echo "fork: gh CLI required" >&2; return 1 }
 
-  local host path
+  local host repo
   _parse_git_url "$url" || return 1
 
-  local target="${HOME}/src/${host}/${path}"
+  local target="${HOME}/src/${host}/${repo}"
 
   if [[ -d "$target" ]]; then
     echo "Already exists: $target"
@@ -81,18 +81,18 @@ function fork() {
   fi
 
   # Fork on GitHub (idempotent — no-op if already forked)
-  gh repo fork "${host}/${path}" --clone=false
+  gh repo fork "${host}/${repo}" --clone=false
 
   # Resolve URLs via gh (handles GHE SSH usernames correctly)
   local gh_user
   gh_user=$(gh api user --hostname "$host" --jq .login 2>/dev/null) || \
     gh_user=$(gh api user --jq .login)
-  local fork_repo="${gh_user}/${path##*/}"
+  local fork_repo="${gh_user}/${repo##*/}"
   local fork_url upstream_url
   fork_url=$(gh repo view "${fork_repo}" --hostname "$host" --json sshUrl --jq .sshUrl 2>/dev/null) || \
     fork_url="https://${host}/${fork_repo}.git"
-  upstream_url=$(gh repo view "${host}/${path}" --json sshUrl --jq .sshUrl 2>/dev/null) || \
-    upstream_url="https://${host}/${path}.git"
+  upstream_url=$(gh repo view "${host}/${repo}" --json sshUrl --jq .sshUrl 2>/dev/null) || \
+    upstream_url="https://${host}/${repo}.git"
 
   mkdir -p "$(dirname "$target")"
   git clone "$fork_url" "$target" && cd "$target"
@@ -105,23 +105,24 @@ function fork() {
   git remote -v
 }
 
-# Helper: parse a git URL into $host and $path (org/repo only)
+# Helper: parse a git URL into $host and $repo (org/repo only).
+# NB: don't name this variable `path` — in zsh it's tied to $PATH.
 function _parse_git_url() {
   local url="$1"
 
   case "$url" in
     git@*:*)       # git@github.com:org/repo.git
       host="${${url#git@}%%:*}"
-      path="${url#*:}"
+      repo="${url#*:}"
       ;;
     ssh://*)       # ssh://git@host/org/repo.git
       host="${${url#ssh://}%%/*}"
       host="${host#*@}"
-      path="${url#ssh://*${host}/}"
+      repo="${url#ssh://*${host}/}"
       ;;
     https://*|http://*)  # https://github.com/org/repo[/tree/main/...]
       host="${${url#http*://}%%/*}"
-      path="${url#http*://${host}/}"
+      repo="${url#http*://${host}/}"
       ;;
     *)
       echo "unrecognized URL format: $url" >&2
@@ -130,24 +131,24 @@ function _parse_git_url() {
   esac
 
   # Strip .git suffix and trailing slash
-  path="${path%.git}"
-  path="${path%/}"
+  repo="${repo%.git}"
+  repo="${repo%/}"
 
   # Keep only org/repo (first two path segments)
-  local segments=(${(s:/:)path})
+  local segments=(${(s:/:)repo})
   if (( ${#segments[@]} < 2 )); then
     echo "can't determine org/repo from: $url" >&2
     return 1
   fi
-  path="${segments[1]}/${segments[2]}"
+  repo="${segments[1]}/${segments[2]}"
 }
 
-# Helper: build a clone-friendly URL from the parsed host/path
+# Helper: build a clone-friendly URL from the parsed host/repo
 function _build_clone_url() {
   local url="$1"
   case "$url" in
     https://*|http://*)
-      clone_url="https://${host}/${path}.git"
+      clone_url="https://${host}/${repo}.git"
       ;;
     *)
       clone_url="$url"
