@@ -36,6 +36,7 @@ alias ofd='open $PWD'
 alias grep='grep --color=auto'
 alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true  && killall Finder"
 alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+alias assume="source assume"
 
 # ── Functions ─────────────────────────────────────────────────────────
 # Clone a repo into ~/src/<host>/<org>/<repo> and cd into it.
