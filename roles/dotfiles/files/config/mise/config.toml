@@ -5,3 +5,7 @@ terraform = "1.9"
 tflint = "latest"
 uv = "latest"
 bun = "latest"
+
+[env]
+GITHUB_TOKEN = "{{ exec(command='security find-generic-password -a vegardx -s github-packages-token -w') }}"
+GHE_TOKEN = "{{ exec(command='security find-generic-password -a vegardx -s ghe-packages-token -w') }}"

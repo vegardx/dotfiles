@@ -1,0 +1,2 @@
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+//npm.pkg.dnb.ghe.com/:_authToken=${GHE_TOKEN}
