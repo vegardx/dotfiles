@@ -7,6 +7,5 @@ uv = "latest"
 bun = "latest"
 
 [env]
-NPM_CONFIG_USERCONFIG = "~/.config/npm/npmrc"
 NPM_GITHUB_TOKEN = "{{ exec(command='security find-generic-password -a vegardx -s github-packages-token -w') }}"
 NPM_GHE_TOKEN = "{{ exec(command='security find-generic-password -a vegardx -s ghe-packages-token -w') }}"

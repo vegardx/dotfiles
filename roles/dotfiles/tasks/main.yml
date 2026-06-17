@@ -67,6 +67,13 @@
     state: link
     force: true
 
+- name: Symlink ~/.npmrc
+  ansible.builtin.file:
+    src: "{{ ansible_facts.env.HOME }}/.config/npm/npmrc"
+    dest: "{{ ansible_facts.env.HOME }}/.npmrc"
+    state: link
+    force: true
+
 # ── Zsh config (ZDOTDIR = ~/.config/zsh) ─────────────────────────────
 - name: Symlink zsh dotfiles
   ansible.builtin.file:
