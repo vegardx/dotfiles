@@ -22,7 +22,6 @@
     - .config/zsh
     - .config/ghostty/themes
     - .config/mise
-    - .config/npm
     - .config/gh
     - .config/ssl
     - .config/zed
@@ -69,7 +68,7 @@
 
 - name: Symlink ~/.npmrc
   ansible.builtin.file:
-    src: "{{ ansible_facts.env.HOME }}/.config/npm/npmrc"
+    src: "{{ role_path }}/files/config/npm/npmrc"
     dest: "{{ ansible_facts.env.HOME }}/.npmrc"
     state: link
     force: true
@@ -124,7 +123,6 @@
     - ghostty/config
     - ghostty/themes/catppuccin-macchiato.conf
     - mise/config.toml
-    - npm/npmrc
     - gh/config.yml
     - ssl/zscaler.pem
     - zed/settings.json
