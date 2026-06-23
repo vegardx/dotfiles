@@ -56,6 +56,10 @@ security add-generic-password -a $LOGNAME -s exa-api-key -w "<value>"
 security add-generic-password -a $LOGNAME -s context7-api-key -w "<value>"  # optional, for higher rate limits
 ```
 
+Once the entries exist they are loaded automatically into every shell as
+`EXA_API_KEY` / `CONTEXT7_API_KEY` via mise's `[env]` — same mechanism as the
+npm registry tokens. A missing entry is a no-op (the variable is just unset).
+
 ## Post-setup
 
 Manual steps after the playbook completes:
