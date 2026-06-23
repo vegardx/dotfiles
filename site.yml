@@ -13,3 +13,20 @@
       tags: [macos]
     - role: runtimes
       tags: [runtimes]
+
+  post_tasks:
+    - name: Display post-setup reminders
+      ansible.builtin.debug:
+        msg: >-
+          {{
+            ['Manual steps remaining:'] +
+            (
+              range(1, (setup_reminders | default([]) | length) + 1)
+              | map('string')
+              | zip(setup_reminders | default([]))
+              | map('join', '. ')
+              | list
+            )
+          }}
+      when: setup_reminders | default([]) | length > 0
+      tags: [always]

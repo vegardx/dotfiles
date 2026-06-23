@@ -112,6 +112,18 @@
     - gpg.conf
     - gpg-agent.conf
 
+- name: Add GnuPG post-setup reminder
+  ansible.builtin.set_fact:
+    setup_reminders: >-
+      {{
+        setup_reminders | default([]) +
+        dotfiles_post_setup_reminders
+      }}
+  vars:
+    dotfiles_post_setup_reminders:
+      - "Set up GPG with YubiKey: gpg --card-status"
+  changed_when: false
+
 # ── Other ~/.config apps ─────────────────────────────────────────────
 - name: Symlink config files
   ansible.builtin.file:

@@ -198,6 +198,18 @@
   changed_when: login_item_result.rc == 0
   failed_when: false
 
+- name: Add login items post-setup reminder
+  ansible.builtin.set_fact:
+    setup_reminders: >-
+      {{
+        setup_reminders | default([]) +
+        macos_post_setup_reminders
+      }}
+  vars:
+    macos_post_setup_reminders:
+      - "Log out and back in for login items to take effect"
+  changed_when: false
+
 # ── App preferences ───────────────────────────────────────────────────
 - name: Import Stats preferences
   ansible.builtin.command: defaults import eu.exelban.Stats {{ role_path }}/../dotfiles/files/config/stats/eu.exelban.Stats.plist
