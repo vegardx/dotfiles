@@ -58,7 +58,8 @@ security add-generic-password -a $LOGNAME -s context7-api-key -w "<value>"  # op
 
 Once the entries exist they are loaded automatically into every shell as
 `EXA_API_KEY` / `CONTEXT7_API_KEY` via mise's `[env]` — same mechanism as the
-npm registry tokens. A missing entry is a no-op (the variable is just unset).
+npm registry tokens. A missing entry is a no-op (the variable is set to an
+empty string, which both tools treat as absent).
 
 ## Post-setup
 
