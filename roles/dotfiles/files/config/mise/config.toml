@@ -7,7 +7,7 @@ uv = "latest"
 bun = "latest"
 
 [env]
-NPM_GITHUB_TOKEN = "{{ exec(command='security find-generic-password -a $LOGNAME -s github-packages-token -w') }}"
-NPM_GHE_TOKEN = "{{ exec(command='security find-generic-password -a $LOGNAME -s ghe-packages-token -w') }}"
-EXA_API_KEY = "{{ exec(command='security find-generic-password -a $LOGNAME -s exa-api-key -w 2>/dev/null || true') }}"
-CONTEXT7_API_KEY = "{{ exec(command='security find-generic-password -a $LOGNAME -s context7-api-key -w 2>/dev/null || true') }}"
+NPM_GITHUB_TOKEN = "{{ exec(command='security find-generic-password -a \"$LOGNAME\" -s github-packages-token -w') }}"
+NPM_GHE_TOKEN = "{{ exec(command='security find-generic-password -a \"$LOGNAME\" -s ghe-packages-token -w') }}"
+EXA_API_KEY = "{{ exec(command='security find-generic-password -a \"$LOGNAME\" -s exa-api-key -w 2>/dev/null || true') }}"
+CONTEXT7_API_KEY = "{{ exec(command='security find-generic-password -a \"$LOGNAME\" -s context7-api-key -w 2>/dev/null || true') }}"
