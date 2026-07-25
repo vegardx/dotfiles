@@ -15,7 +15,21 @@ earlier guidance. When two files contradict each other, the later one wins.
 - Don't explain what you're about to do — just do it, then summarise if needed.
 - When something is ambiguous, ask. If there are multiple valid approaches,
   surface them — don't silently pick one.
+- Never start implementation work unless explicitly told to implement.
 - Prefer showing code over describing code.
+
+## Agent discipline
+- Verify assumptions against available source, docs, or tool output before
+  acting. Don't rely on memory when the answer can be checked.
+- State uncertainty explicitly. Don't present guesses, assumptions, or unverified
+  conclusions as facts.
+- When debugging, don't jump to conclusions. Reproduce, inspect evidence, and
+  verify the root cause before changing code.
+- Don't ignore failing commands, tests, or tool errors. Investigate or report
+  them; don't continue as if they succeeded.
+- Don't invent scope. Do only what the plan/request defines; ask the user when
+  the scope is unclear.
+- Don't assume backwards compatibility is required. Ask when unsure.
 
 ## Safety
 

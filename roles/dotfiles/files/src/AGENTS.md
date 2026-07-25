@@ -20,6 +20,19 @@ Applies to every repo regardless of host or org.
 - Body only when the change needs explanation — not a description of what the
   diff already shows.
 
+## Engineering discipline
+- Do the proper fix, not the lazy or shortcut fix. If the correct approach is
+  known, take it; don't knowingly ship temporary/simple workarounds.
+- Preserve existing intended behaviour when replacing code unless changing it is
+  explicit. Account for the functionality the old code handled before removing
+  or rewriting it; don't preserve bugs or accidental behaviour unless required.
+- Keep changes as small as possible while still solving the problem properly.
+  Don't broaden the design just because you're already touching nearby code.
+- Don't change ownership boundaries, public contracts, permissions, or
+  operational behaviour casually. Call out the impact and ask when unsure.
+- After changing code, run the smallest relevant validation that proves the
+  change works. If validation cannot be run, say why.
+
 ## TypeScript
 - Strict mode always on.
 - No `any` unless there is a concrete reason; prefer `unknown` for loose inputs.
