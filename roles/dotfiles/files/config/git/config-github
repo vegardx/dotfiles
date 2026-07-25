@@ -1,3 +1,8 @@
 [user]
 	email = vegard@netwerk.io
 	name = Vegard Hansen
+	signingkey = BBF808963354ED16
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
