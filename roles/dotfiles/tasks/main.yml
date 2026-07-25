@@ -188,3 +188,26 @@
     - github.com/vegardx/AGENTS.md
     - github.com/netwerk-io/AGENTS.md
     - dnb.ghe.com/AGENTS.md
+
+# ── Password store (pass) ────────────────────────────────────────────
+# update: false so an existing store is never fetched/reset — the store is a
+# live git repo the user commits to, and may hold unpushed local commits.
+# block/rescue turns a fresh-machine failure (no GitHub SSH auth yet) into a
+# post-setup reminder instead of aborting the whole run.
+- name: Clone password store
+  block:
+    - name: Clone pass password store
+      ansible.builtin.git:
+        repo: git@github.com:vegardx/personal.git
+        dest: "{{ ansible_facts.env.HOME }}/src/github.com/vegardx/personal"
+        version: master
+        update: false
+  rescue:
+    - name: Add password store clone reminder
+      ansible.builtin.set_fact:
+        setup_reminders: >-
+          {{
+            setup_reminders | default([]) +
+            ['Clone password store (needs GitHub SSH auth): git clone git@github.com:vegardx/personal.git ~/src/github.com/vegardx/personal']
+          }}
+      changed_when: false
