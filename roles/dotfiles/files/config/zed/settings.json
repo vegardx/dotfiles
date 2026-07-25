@@ -7,6 +7,44 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "show_wrap_guides": true,
+  "minimap": {
+    "show": "never"
+  },
+  "toolbar": {
+    "agent_review": false,
+    "selections_menu": false,
+    "quick_actions": false,
+    "breadcrumbs": false
+  },
+  "inline_code_actions": false,
+  "gutter": {
+    "folds": false,
+    "bookmarks": false,
+    "runnables": false,
+    "breakpoints": false,
+    "min_line_number_digits": 1,
+    "line_numbers": true
+  },
+  "agent_servers": {
+    "github-copilot-cli": {
+      "type": "registry"
+    },
+    "pi-acp": {
+      "type": "registry"
+    }
+  },
+  "ui_font_family": ".ZedSans",
+  "outline_panel": {
+    "button": false
+  },
+  "git_panel": {
+    "button": false
+  },
+  "collaboration_panel": {
+    "button": false,
+    "dock": "left"
+  },
   "git": {
     "blame": {
       "show_avatar": false
@@ -45,6 +83,9 @@
     "button": false
   },
   "diagnostics": {
+    "inline": {
+      "padding": 4
+    },
     "button": false
   },
   "status_bar": {
@@ -55,6 +96,8 @@
     "trust_all_worktrees": true
   },
   "terminal": {
+    "show_count_badge": true,
+    "dock": "left",
     "toolbar": {
       "breadcrumbs": false
     },
@@ -65,17 +108,25 @@
     }
   },
   "project_panel": {
+    "entry_spacing": "standard",
+    "auto_fold_dirs": false,
+    "scrollbar": {
+      "show": "auto",
+      "horizontal_scroll": true
+    },
+    "show_diagnostics": "errors",
+    "diagnostic_badges": false,
     "hide_root": false,
     "indent_guides": {
       "show": "never"
     },
-    "git_status_indicator": false,
+    "git_status_indicator": true,
     "bold_folder_labels": false,
     "auto_reveal_entries": true,
     "indent_size": 20.0,
     "folder_icons": false,
     "file_icons": false,
-    "dock": "left"
+    "dock": "right"
   },
   "agent": {
     "default_profile": "write",
@@ -120,6 +171,6 @@
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "One Dark",
+    "dark": "Ayu Mirage",
   },
 }
