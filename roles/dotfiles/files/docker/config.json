@@ -1,5 +1,7 @@
 {
-  "auths": {},
+  "auths": {
+    "containers.dnb.ghe.com": {}
+  },
   "credsStore": "osxkeychain",
   "currentContext": "colima"
 }
